@@ -39,15 +39,13 @@ class SentimentAnalysisModel:
 
     def _decode_sentiment(self, score: float, include_neutral=True) -> str:
         if include_neutral:
-            label = Sentiment.NEUTRAL.value
+            label = Sentiment.SITROLL.value
             if score <= SENTIMENT_THRESHOLD[0]:
-                label = Sentiment.NEGATIVE.value
-            elif score >= SENTIMENT_THRESHOLD[1]:
-                label = Sentiment.POSITIVE.value
+                label = Sentiment.NOTROLL.value
 
             return label
         else:
-            return Sentiment.NEGATIVE.value if score < 0.5 else Sentiment.POSITIVE.value
+            return Sentiment.NOTROLL.value if score < 0.5 else Sentiment.SITROLL.value
 
     def _pre_process(self, payload: TextPayload) -> str:
         logger.debug("Pre-processing payload.")
